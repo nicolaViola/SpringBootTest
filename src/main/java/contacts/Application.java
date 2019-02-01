@@ -1,14 +1,22 @@
 package contacts;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication(scanBasePackages = {"contacts"})
 @EnableConfigurationProperties(AppSettings.class)
-public class Application{
+public class Application extends WebSecurityConfigurerAdapter{
 	
 //	@Autowired
 //	private ApplicationContext applicationContext;
@@ -18,6 +26,36 @@ public class Application{
 		System.out.println("Started ...");
 	}
 	
+	  @Override
+	  protected void configure(HttpSecurity http) throws Exception {
+	    http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests()
+	      .anyRequest().hasRole("ADMIN")
+	      .and()
+	      .httpBasic();
+	  }
+	  
+	  @Bean
+
+	  @Override
+
+	  public UserDetailsService userDetailsService() {
+	      UserDetails user =
+	          User.withDefaultPasswordEncoder()
+	              .username("nicola")
+	              .password("viola")
+	              .roles("ADMIN")
+	              .build();
+	      return new InMemoryUserDetailsManager(user);
+
+	  }
+	
+//	@Bean
+//	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+//	    return http.authorizeExchange()
+//	      .pathMatchers("/actuator/**").permitAll()
+//	      .anyExchange().authenticated()
+//	      .and().build();
+//	}
 	
 //	@RequestMapping(path="/")
 //	@GetMapping
