@@ -1,11 +1,8 @@
 package contacts;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,20 +10,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @SpringBootApplication(scanBasePackages = {"contacts"})
 @EnableConfigurationProperties(AppSettings.class)
 public class Application extends WebSecurityConfigurerAdapter{
 	
-	@Autowired
-	private ApplicationContext applicationContext;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -36,10 +25,16 @@ public class Application extends WebSecurityConfigurerAdapter{
 	
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
-	    http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests()
-	      .anyRequest().hasRole("ADMIN")
+		  
+		  http.mvcMatcher("/**").authorizeRequests()
+		  .anyRequest().hasRole("ADMIN")
 	      .and()
 	      .httpBasic();
+		  
+//	    http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests()
+//	      .anyRequest().hasRole("ADMIN")
+//	      .and()
+//	      .httpBasic();
 	  }
 	  
 	  @Bean
