@@ -1,8 +1,10 @@
 package contacts;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableConfigurationProperties(AppSettings.class)
 public class Application{
 	
-//	@Autowired
-//	private ApplicationContext applicationContext;
+	@Autowired
+	private ApplicationContext applicationContext;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		System.out.println("Started ...");
+		
 	}
+	
+	
 	
 	
 //	@RequestMapping(path="/")
