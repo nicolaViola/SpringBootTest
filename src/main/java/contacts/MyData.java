@@ -3,10 +3,7 @@ package contacts;
 public class MyData {
 	
 	private String name;
-	
 	private String surname;
-	
-	
 
 	public MyData(String name, String surname) {
 		this.name = name;
@@ -20,6 +17,5 @@ public class MyData {
 	public String getSurname() {
 		return surname;
 	}
-
 
 }
