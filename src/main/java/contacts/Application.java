@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(scanBasePackages = {"contacts"})
-@EnableConfigurationProperties(AppSettings.class)
+@SpringBootApplication(scanBasePackages = {"contacts", "controller"})
+//@EnableConfigurationProperties(AppSettings.class)
 public class Application /*extends WebSecurityConfigurerAdapter*/{
 	
 

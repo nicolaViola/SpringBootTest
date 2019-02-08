@@ -1,4 +1,4 @@
-package contacts;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import contacts.Error;
+import contacts.MyData;
 
 @RestController
 public class MyController {

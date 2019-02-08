@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix="app")
+//@ConfigurationProperties(prefix="app")
 public class AppSettings {
 	
 	@NotNull
